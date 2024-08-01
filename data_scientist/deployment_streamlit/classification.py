@@ -9,6 +9,7 @@ import tensorflow as tf
 import math
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 from collections import defaultdict
 
 # Initialize stopword remover and stemmer
@@ -90,6 +91,7 @@ def map_original_to_stemmed(tokens_list, stemmer):
 def stem_tokens(tokens):
     return [stemmer.stem(token) for token in tokens]
 
+max_len = 40
 def run():
     st.title("Hey, Let's Classify Your :blue[Text] :sunglasses:")
     with st.form("prediction_form"):
@@ -105,7 +107,6 @@ def run():
             text = stem_tokens(text)
             text_id = convert_word_to_nominal_category(text)
             text_array = np.array([text_id])
-            
             y_pred = model.predict(text_array)
             y_pred = np.argmax(y_pred, axis=-1)
             
