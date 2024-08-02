@@ -1,1 +1,1 @@
-https://huggingface.co/spaces/REV04/GamingScout
+https://huggingface.co/spaces/REV04/Gaming_Scout
